@@ -22,7 +22,7 @@ def game_hash
           :points => 12,
           :rebounds => 4,
           :assists => 7,
-          :steals => 7,
+          :steals => 22,
           :blocks => 15,
           :slam_dunks => 10
         },
@@ -52,7 +52,7 @@ def game_hash
           :points => 6,
           :rebounds => 12,
           :assists => 12,
-          :steals => 22,
+          :steals => 7,
           :blocks => 5,
           :slam_dunks => 12
         }
@@ -96,7 +96,7 @@ def game_hash
           :number => 1,
           :shoe => 19,
           :points => 26,
-          :rebounds => 12,
+          :rebounds => 11,
           :assists => 6,
           :steals => 3,
           :blocks => 8,
@@ -118,38 +118,109 @@ def game_hash
 end
 
 
-
-def teams_merge
- return teams_hash = game_hash[:home][:players] << game_hash[:away][:players]
-end
-
-
 def num_points_scored(players_name)
-  teams_merge.each do |key, value|
-    # binding.pry
-    if key[:player_name] == players_name
-      # binding.pry
-      return key[:points]
-    else
-      puts "this is correct"
+  game_hash.each do |home_away, team|
+    team.each do |k, v|
+      if k == :players
+        v.each do |player|
+          if player[:player_name] == players_name
+            return player[:points]
+          end
+        end   
+      end
     end
   end
 end
 
-  
-  # game_hash.each do |home_away, team|
-  #   team.each do |k, v|
-  #     if k == :players
-  #       v.each do |player|
-  #         if player[:player_name] == players_name
-  #           return player[:points]
-  #         end
-  #       end   
-  #     end
-  #   end
-  # end
-# end
+def shoe_size(players_name)
+  game_hash.each do |home_away, team|
+    team.each do |k, v|
+      if k == :players
+        v.each do |player|
+          if player[:player_name] == players_name
+            return player[:shoe]
+          end
+        end   
+      end
+    end
+  end
+end
 
 
+def team_colors(team_name)
+  game_hash.each do |home_away, team|
+    if team[:team_name] == team_name
+      return team[:colors]
+    end
+  end
+end
+
+def team_names
+  game_hash.map do |place, team|
+    team[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  array = []
+  game_hash.each do |home_away, team|
+    if team[:team_name] == team_name
+      team.each do |attributes, data|
+        if attributes == :players
+          data.each do |player|
+            array << player[:number]
+          end
+        end
+      end
+    end
+  end
+  array
+end
+
+def player_stats(players_name)
+  new_hash = {}
+  game_hash.each do |home_away, team|
+    team.each do |attributes, data|
+      if attributes == :players 
+        data.each do |player|
+          if player[:player_name] == players_name
+            new_hash = player.delete_if do |k, v|
+              k == :player_name
+            end
+          end
+        end
+      end
+    end
+  end
+  new_hash
+end
+
+def big_shoe_rebounds
+  shoe_size = 0
+  rebounds = 0
+    game_hash.each do | team, attributes|
+      attributes[:players].each do |stats|
+        if stats[:shoe] > shoe_size
+          shoe_size = stats[:shoe]
+          rebounds = stats[:rebounds]
+        end
+      end
+    end
+  rebounds
+end
+
+def most_points_scored
+  points_scored = 0
+  player = "" 
+    game_hash.each do | team, attributes|
+      attributes[:players].each do |stats|
+        if stats[:points] > points_scored
+          points_scored = stats[:points]
+          player = stats[:player_name]
+        end
+      end
+    end
+  player
+end
 
 
