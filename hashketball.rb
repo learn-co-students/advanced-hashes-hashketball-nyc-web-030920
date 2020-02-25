@@ -74,7 +74,6 @@ def team_colors(team)
     colors = []
 
     if hash[:home][:team_name] == team 
-
         colors = hash[:home][:colors] 
     end 
 
@@ -89,5 +88,23 @@ def team_names(hash)
         team_names.push(value[:team_name])
     }
 
-    eam_names
+    team_names
 end
+
+def player_numbers(team)
+    jersey_numbers = []
+    hash = game_hash
+
+    hash.each { |key, value|
+    #key = :away, value = {:team_name => "Charlotte Hornets"}
+        value[:players].each  { |k, v|
+        # value[:players] = {:player_name=>"Alan Anderson", :number=>0}
+
+        if value[:team_name] == team
+            jersey_numbers.push(k[:number])
+        end 
+            }
+        }
+
+    jersey_numbers
+end 
