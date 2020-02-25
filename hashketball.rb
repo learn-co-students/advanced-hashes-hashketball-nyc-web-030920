@@ -28,18 +28,28 @@ def game_hash
     hash 
 end 
 
-puts game_hash
+####################################
 
-###########################################
-# trying to write this method in a dynamic way
+# hash[:away][:players][:player_name] = "Jeff Adrien"
+# hash[:away][:players][0][points] = 10
 
-# hash[:home] = {}
+# player_name = "Jeff Adrien"
 
-# hash[:home][:team_name] = "Brooklyn Nets"
-# hash[:home][:colors] = ["Black", "White"]
-# hash[:home][:players] = []
+def num_points_scored(player_name)
+    number = ""
+    hash = game_hash
 
-# home_players = hash[:home][:players]
+    hash.each { |key, value|
+    #key = :away, value = {:team_name => "Charlotte Hornets"}
 
-# home_players.push({:player_name => "Alan Anderson", :number => 0, :shoe => 16, :points => 22, :rebounds => 12, :assists => 12, :steals => 3, :blocks => 1, :slam_dunks => 1})
-# home_players.push({:player_name => "Reggie Evans", :number => 30, :shoe => 14, :points => 12, :rebounds => 12, :assists => 12, :steals => 12, :blocks => 12, :slam_dunks => 7})
+    value[:players].each  { |k, v|
+        if k[:player_name] == player_name
+            number = k[:points]
+        end
+        }
+    } 
+    
+    puts number
+end 
+
+puts num_points_scored("Jeff Adrien")
