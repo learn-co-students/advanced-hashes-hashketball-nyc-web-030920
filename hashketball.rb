@@ -66,7 +66,28 @@ def shoe_size(player_name)
         }
     } 
     
-    puts shoe_size
+    shoe_size
 end 
 
-puts shoe_size("Jeff Adrien")
+def team_colors(team)
+    hash = game_hash
+    colors = []
+
+    if hash[:home][:team_name] == team 
+
+        colors = hash[:home][:colors] 
+    end 
+
+    colors
+end 
+
+def team_names(hash)
+    team_names = []
+    hash = game_hash
+
+    hash.each { |key, value|
+        team_names.push(value[:team_name])
+    }
+
+    eam_names
+end
