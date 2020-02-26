@@ -101,3 +101,23 @@ def player_numbers(team)
 
     jersey_numbers
 end 
+
+def player_stats(name)
+    hash = game_hash
+    stats = {}
+
+    hash.each { |key, value|
+        value[:players].each  { |k, v|
+
+        if k[:player_name] == name
+            stats = k
+            stats.reject! { |k|
+                k == :player_name
+            }
+        end 
+
+            }
+        }
+
+    stats
+end 
