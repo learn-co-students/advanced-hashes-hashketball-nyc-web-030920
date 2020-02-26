@@ -14,7 +14,7 @@ hash = {
 
     :away => {
         :team_name => "Charlotte Hornets", 
-        :colors => ["Turquoise, Purple"],
+        :colors => ["Turquoise", "Purple"],
         :players => [
             {:player_name=>"Jeff Adrien", :number=>4, :shoe=>18, :points=>10, :rebounds=>1, :assists=>1, :steals=>2, :blocks=>7, :slam_dunks=>2},
             {:player_name=>"Bismack Biyombo", :number=>0, :shoe=>16, :points=>12, :rebounds=>4, :assists=>7, :steals=>22, :blocks=>15, :slam_dunks=>10},
@@ -71,11 +71,13 @@ end
 
 def team_colors(team)
     hash = game_hash
-    colors = []
+    colors = ""
 
-    if hash[:home][:team_name] == team 
-        colors = hash[:home][:colors] 
-    end 
+    hash.each { |key, value|
+        if value[:team_name] == team 
+            colors = value[:colors] 
+        end 
+    }
 
     colors
 end 
@@ -90,6 +92,10 @@ def team_names
 
     team_names
 end
+
+################################################
+# * Build a method, `player_numbers`, that takes in an argument of a team name and
+#   returns an `Array` of the jersey numbers for that team.
 
 def player_numbers(team)
     jersey_numbers = []
