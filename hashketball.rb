@@ -28,11 +28,6 @@ hash = {
 hash 
 end 
 
-####################################
-
-# hash[:away][:players][:player_name] = "Jeff Adrien"
-# hash[:away][:players][0][points] = 10
-
 def num_points_scored(player_name)
     number = ""
     hash = game_hash
@@ -49,8 +44,6 @@ def num_points_scored(player_name)
     
     number
 end 
-
-######################################
 
 def shoe_size(player_name)
     shoe_size = ""
@@ -93,18 +86,12 @@ def team_names
     team_names
 end
 
-################################################
-# * Build a method, `player_numbers`, that takes in an argument of a team name and
-#   returns an `Array` of the jersey numbers for that team.
-
 def player_numbers(team)
     jersey_numbers = []
     hash = game_hash
 
     hash.each { |key, value|
-    #key = :away, value = {:team_name => "Charlotte Hornets"}
         value[:players].each  { |k, v|
-        # value[:players] = {:player_name=>"Alan Anderson", :number=>0}
 
         if value[:team_name] == team
             jersey_numbers.push(k[:number])
