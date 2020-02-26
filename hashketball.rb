@@ -80,7 +80,7 @@ def team_colors(team)
     colors
 end 
 
-def team_names(hash)
+def team_names
     team_names = []
     hash = game_hash
 
