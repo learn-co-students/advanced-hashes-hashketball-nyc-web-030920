@@ -1,4 +1,4 @@
-# Write your code here!
+require 'pry'
 
 def game_hash
   {:home => {
@@ -263,21 +263,18 @@ def winning_team
   team1_total = 0
   team2_total = 0
   
-  index = 0
-  while index < game_hash[:home][:players].length do
-    team1_total +=  game_hash[:home][:players][:points]
-    index += 1
-  end
+  game_hash[:home][:players].each do |player, data|
+    team1_total += player[:points]
+    end
+    
+  game_hash[:away][:players].each do |player, data|
+      team2_total += player[:points]
+    end
+    
   
-  index2 = 0
-  while index2 < game_hash[:away][:players].length do
-    team2_total +=  game_hash[:away][:players][:points]
-    index2 += 1
-  end
-  
-  if team_one_total > team_two_total then
+  if team1_total > team2_total
     return "Brooklyn Nets"
-  else 
+    elsif team1_total < team2_total
     return "Charlotte Hornets"
   end 
 end
