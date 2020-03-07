@@ -1,7 +1,9 @@
 require "pry" 
 
 def game_hash
+   
   hash = 
+  
   {
     
     :home => 
@@ -163,143 +165,46 @@ def game_hash
   
     
   }
+
   hash 
+
 end
+
+#   # array = [] 
+#   # index = 0 
+#   # # while index < 10 do
+#   #   if "#{name}" == game_hash[:home][:players][index][:player_name] 
+#   #     array << game_hash[:home][:players][index][:points]
+#   #   end 
+#   #   if "#{name}" == game_hash[:away][:players][index][:player_name]
+#   #     array << game_hash[:away][:players][index][:points]
+#   #   end 
+#   #   index += 1 
+#   # end
+#   # array 
+# # end
+
+# def team_colors(team_name)
+#   array = []
+#   if game_hash[:home][:team_name]
+#     array << game_hash[:home][:colors]
+# # binding.pry
+#   end  
+#   array 
+# end 
 
 def num_points_scored(player_name)
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |player|
-      return player[:points] if player[:player_name] == player_name
-    end
-  end
-end
-
-def shoe_size(players_name)
-  game_hash.each do |location, team_data|
-    team_data.each do |attribute, data| 
-      if attribute == :players
-        data.each do |player| 
-          if player[:player_name] == players_name
-            return player[:shoe] 
-          end
-        end
-      end
-    end
-  end
-end
-  
-def team_colors(team_name)
-  game_hash.each do |location, team_data| 
-    if team_data[:team_name] == team_name 
-      return team_data[:colors]
+  array = [] 
+  i = 0 
+  while i < 5 do 
+    if game_hash[:home][:players][i][:player_name] = player_name
+      array << game_hash[:home][:players][i][:points]
+    elsif game_hash[:away][:players][i][:player_name] = player_name
+      array << game_hash[:away][:players][i][:points]
+    else 
+      puts "Sorry, that player name not found."
     end 
+    i += 1 
   end 
-end 
-
-def team_names
-  game_hash.map do |location, team_data|
-    team_data[:team_name]
-  end 
-end 
-
-def player_numbers(team_name)
-  numbers = [] 
-  game_hash.each do |location, team_data|
-    if team_data[:team_name] == team_name
-      team_data.each do |attributes, data| 
-        if attributes == :players 
-          data.each do |player| 
-            numbers << player[:number]
-          end
-        end
-      end
-    end
-  end
-  numbers 
-end 
-
-def player_stats(players_name)
-  new = {} 
-  game_hash.each do |location, team_data| 
-    team_data.each do |attributes, data| 
-      if attributes == :players 
-        data.each do |player| 
-          if player[:player_name] == players_name
-            new = player.delete_if do |key, value| 
-              key == :player_name
-            end 
-          end
-        end
-      end
-    end
-  end 
-  new 
-end 
-
-def big_shoe_rebounds
-  biggest_size = 0
-  rebounds = 0
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |player|
-      size = player[:shoe]
-      if size > biggest_size
-        biggest_size = size
-        rebounds = player[:rebounds]
-      end
-    end
-  end
-  rebounds
-end
-
-def most_points_scored
-  most_points = 0
-  top = ''
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |player|
-      points = player[:points]
-      if points > most_points
-        most_points = points
-        top = player[:player_name]
-      end
-    end
-  end
-  top
-end
-
-def winning_team
-  total_points = 0
-  win_team = ''
-  game_hash.each do |location, team_data|
-    team_points = 0
-    team_name = game_hash[location][:team_name]
-    team_data[:players].each do |player|
-      points = player[:points]
-      team_points += points
-    end
-    win_team, total_points = team_name, team_points if team_points > total_points
-  end
-  return win_team
-end
-
-def player_with_longest_name
-  longest = ''
-  longest_length = 0
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |player|
-      name_length = player[:player_name].length
-      longest, longest_length = player[:player_name], name_length if name_length > longest_length
-    end
-  end
-  return longest
-end
-
-def long_name_steals_a_ton?
-  steals_most = ''
-  most_steals = 0
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |player|
-      steals_most, most_steals = player[:player_name], player[:steals] if player[:steals] > most_steals
-    end
-  end
-  return true if steals_most == player_with_longest_name
+  array[0] 
 end
